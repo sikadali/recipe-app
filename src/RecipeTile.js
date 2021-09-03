@@ -1,0 +1,15 @@
+import React from 'react';
+import './RecipeTile.css';
+
+export default function RecipeTile({recipe}) {
+    if (recipe['recipe']['image'].match(/\.(jpg|jpeg|png|gif)$/)){    
+        return (
+            <div className="recipeTile">
+                <img alt="" className="recipeTile__img" src = {recipe['recipe']['image']}/>
+                <p className="recipeTile__name">{recipe['recipe']['label']}</p>
+            </div>
+        )
+    }else{
+        return null;
+    }
+}
