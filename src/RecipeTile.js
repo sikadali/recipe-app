@@ -4,7 +4,9 @@ import './RecipeTile.css';
 export default function RecipeTile({recipe}) {
     if (recipe['recipe']['image'].match(/\.(jpg|jpeg|png|gif)$/)){    
         return (
-            <div className="recipeTile">
+            <div className="recipeTile" onClick={() => {
+                window.open(recipe['recipe']['url']);
+            }}>
                 <img alt="" className="recipeTile__img" src = {recipe['recipe']['image']}/>
                 <p className="recipeTile__name">{recipe['recipe']['label']}</p>
             </div>
