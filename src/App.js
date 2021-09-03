@@ -5,7 +5,7 @@ import RecipeTile from './RecipeTile';
 
 const APP_ID = '717f8b5a';
 const APP_KEY = 'e54036985819b21aef605d6f6c9579b0';
-const cuisineTypes = [
+const cuisineTypes = ["",
 	'American',
 	'Asian',
 	'British',
@@ -29,7 +29,7 @@ const cuisineTypes = [
 function App() {
 	const [ query, setQuery ] = useState('');
 	const [ recipes, setRecipes ] = useState([]);
-	const [ cuisineTypeLabel, setCuisineTypeLabel ] = useState("French");
+	const [ cuisineTypeLabel, setCuisineTypeLabel ] = useState("");
 
 	const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=15&cuisineType=${cuisineTypeLabel}`;
 
@@ -44,6 +44,10 @@ function App() {
 		getRecipes();
 	};
 
+	const selectCuisineType = (e) => {
+		setCuisineTypeLabel(e.target.value);
+	}
+	
 	return (
 		<div className="app">
 			<h1>World Food Recipes</h1>
@@ -56,7 +60,7 @@ function App() {
 					onChange={(e) => setQuery(e.target.value)}
 				/>
 				<input className="app__submit" type="submit" value="Search" onClick={onSubmit} />
-				<select className="app__cuisineType" onClick={(e) => {setCuisineTypeLabel(e.target.value);}}>
+				<select className="app__cuisineType" onClick={selectCuisineType}>
 					{cuisineTypes.map( (type) => {
 						return(
 							<option>
