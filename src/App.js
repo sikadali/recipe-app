@@ -34,9 +34,11 @@ function App() {
 	const url = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=15&cuisineType=${cuisineTypeLabel}`;
 
 	const getRecipes = async () => {
-		let result = await Axios.get(url);
-		setRecipes(result.data.hits);
-		console.log(result.data);
+		Axios.get(url).then(response => {
+			setRecipes([...response.data.hits]);
+			console.log(response.data.hits);
+			console.log("recipes =>", recipes)
+		})
 	};
 
 	const onSubmit = (e) => {
@@ -50,7 +52,7 @@ function App() {
 	
 	return (
 		<div className="app">
-			<h1>World Food Recipes</h1>
+			<h1 data-tip="ONHOVER">World Food Recipes</h1>
 			<form className="app__searchForm">
 				<input
 					type="text"
@@ -73,9 +75,10 @@ function App() {
 
 			<div className="app__recipes">
 				{recipes.map((recipe) => {
-					return <RecipeTile recipe={recipe} />;
+					return <RecipeTile data-tip="ONHOVER" recipe={recipe}/>;
 				})}
 			</div>
+			
 		</div>
 	);
 }
